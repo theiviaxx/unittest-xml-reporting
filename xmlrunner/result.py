@@ -388,11 +388,12 @@ class _XMLTestResult(_TextTestResult):
 
             if isinstance(test_runner.output, six.string_types):
                 if test_runner.outfile is None:
-                    filename = path.join(
-                        test_runner.output,
-                        'TEST-%s.xml' % suite_name)
+                    outfile = 'TEST-%s.xml' % suite_name
                 else:
-                    filename = test_runner.outfile
+                    outfile = test_runner.outfile
+                filename = path.join(
+                    test_runner.output,
+                    outfile)
                 with open(filename, 'wb') as report_file:
                     report_file.write(xml_content)
             else:
