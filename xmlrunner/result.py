@@ -387,9 +387,12 @@ class _XMLTestResult(_TextTestResult):
             xml_content = doc.toprettyxml(indent='\t', encoding=test_runner.encoding)
 
             if isinstance(test_runner.output, six.string_types):
-                filename = path.join(
-                    test_runner.output,
-                    'TEST-%s.xml' % suite_name)
+                if test_runner.outfile is None:
+                    filename = path.join(
+                        test_runner.output,
+                        'TEST-%s.xml' % suite_name)
+                else:
+                    filename = test_runner.outfile
                 with open(filename, 'wb') as report_file:
                     report_file.write(xml_content)
             else:
